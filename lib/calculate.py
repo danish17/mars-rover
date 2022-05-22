@@ -1,5 +1,8 @@
-# dictionary to stor the charachter referening to each cardinal compass direction (E, N, W, S) with the value of the angle associated to it. Assuming
-# the East refers to zero and moving anticlock wise means the angle increases, to reach 90 at the north and so on. Will be used later.
+# dictionary to stor the charachter referening to each cardinal compass direction (E, N, W, S) with the value of the
+# angle associated to it. Assuming the East refers to zero and moving anticlock wise means the angle increases,
+# to reach 90 at the north and so on. Will be used later.
+from pprint import pprint
+
 directions = {'E': 0, 'N': 90, 'W': 180, 'S': 270}
 # dictionary stor the the angle values as a string, will be used later
 directions_inv = {'0': 'E', '90': 'N', '180': 'W', '270': 'S'}
@@ -84,7 +87,6 @@ class MarsRover():
     """Checking that the input values are in the required formate and does not exceed the upper right corner limit"""
 
     def checking_the_input(self):
-
         x_upp_right = self.upper_right_corner[0]  # defines the X value of the upper right corner
         y_upp_right = self.upper_right_corner[1]  # defines the X value of the upper right corner
 
@@ -98,7 +100,7 @@ class MarsRover():
         dirn = self.current_position[2]  # defines the cardinal compass direction of the rover's current position
 
         if (
-                x_pos.isdigit() == False or y_pos.isdigit() == False):  # Makes sure that the current X_value and Y_value are integers
+                not x_pos.isdigit() or not y_pos.isdigit()):  # Makes sure that the current X_value and Y_value are integers
             raise Exception("X and Y values should be positive numbers only. Try again!. ")
 
         if (int(x_pos) > int(x_upp_right) or int(y_pos) > int(
@@ -106,7 +108,7 @@ class MarsRover():
             raise Exception("X and y values should be less than the upper right corner values. Try again!")
 
         if (
-                dirn.isalpha() == False or dirn not in MarsRover.direction_letters):  # Makes sure that the given direction is only E (for East) or W (for West) or S (for South) or N (for North)
+                not dirn.isalpha() or dirn not in MarsRover.direction_letters):  # Makes sure that the given direction is only E (for East) or W (for West) or S (for South) or N (for North)
             raise Exception(
                 "The given direction should be on of the cardinal compass direction (as a one letter: E or W oe S or N). Try again!")
 
@@ -114,6 +116,14 @@ class MarsRover():
                                                         self.instructions) == False):  # Makes sure that the given instructions are on of the following: R or M or L
             raise Exception("Instructions should be in a form of letters and only L or R or M. Try again!")
 
+
+def calc(instructions, current_position, upper_right_corner):
+    rover2 = MarsRover(
+        instructions,
+        current_position,
+        upper_right_corner)
+    rover2.checking_the_input()
+    return rover2.general_movement()
 
 def main():
     while True:

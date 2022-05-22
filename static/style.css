@@ -60,3 +60,26 @@ label.form-label-lg {
   font-size: large;
   cursor: pointer;
 }
+
+.result-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 2px;
+}
+.result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.result-label {
+  font-size: large;
+  color: #555555;
+  text-align: center;
+}
+
+.result-value {
+  font-size: xx-large;
+  font-weight: bold;
+  text-align: center;
+}
