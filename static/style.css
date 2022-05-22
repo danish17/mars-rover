@@ -83,3 +83,13 @@ label.form-label-lg {
   font-weight: bold;
   text-align: center;
 }
+
+.error-msg {
+  color: red;
+  display: none;
+  font-size: small;
+}
+
+.error-msg.show {
+  display: block;
+}

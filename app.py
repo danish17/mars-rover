@@ -18,11 +18,15 @@ def calculate():
     rover_current_dir = request.form.get('rover_current_direction')
     rover_instructions = request.form.get('rover_instructions')
 
-    rover_to_be = lib.calculate.calc(
+    try:
+        rover_to_be = lib.calculate.calc(
         upper_right_corner=[rover_upper_right_corner_x, rover_upper_right_corner_y],
         current_position=[rover_current_pos_x, rover_current_pos_y, rover_current_dir],
         instructions=rover_instructions
     )
+    except Exception as e:
+        if request.method == "POST":
+            return render_template('index.html', error=e)
 
     if request.method == "POST":
         return render_template('index.html', result=rover_to_be)
